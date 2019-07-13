@@ -60,6 +60,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config &&
 #make sure your vpn isn't conflicting with ip's!
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')" &&
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
+cp -r ./python-webhook-listener ~/
 ###############################################
 
 ###############################################
@@ -72,6 +73,7 @@ sudo sysctl net.bridge.bridge-nf-call-iptables=1
 ###############################################
 echo setting up packet forwarding between nodes
 echo '#wait a bit after reboot and then configure everything
+python3 /home/pi/python-webhook-listener/app.py &
 sleep 90
 iptables -P FORWARD ACCEPT' > /home/pi/configure.sh
 chmod +x /home/pi/configure.sh
@@ -109,4 +111,3 @@ kubectl apply -f dashboard-admin.yaml
 echo getting login token
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ###############################################
-
