@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+  namespace: kube-system
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /traefik
+        backend:
+          serviceName: traefik-web-ui
+          servicePort: web
+

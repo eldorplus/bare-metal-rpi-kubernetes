@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jp-website-frontend
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /jpribyl
+        backend:
+          serviceName: jp-website-frontend
+          servicePort: http
