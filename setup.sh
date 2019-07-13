@@ -71,16 +71,24 @@ cp -r ./python-webhook-listener ~/
 
 
 ###############################################
+#only do this on master
 echo setting up automatic deployment pipeline
 token=$(openssl rand -base64 32 | tr -d "=+/")
 echo DOCKER_TOKEN=$token > /etc/environment
 echo 'nohup python3 /home/pi/python-webhook-listener/app.py &' > /home/pi/configure.sh
 echo DOCKER TOKEN IS $token INCLUDE IT AS A PARAM OF token IN DOCKER WEBHOOKS
 
+#do this on all
 echo setting up packet forwarding between nodes
 echo '#wait a bit after reboot and then configure everything
 sleep 90
 iptables -P FORWARD ACCEPT' >> /home/pi/configure.sh
+
+#only do this on master
+echo 'iptables -I INPUT -p tcp -s 10.8.0.0/16 --dport 8000 -j ACCEPT
+iptables -I INPUT -p udp -s 10.8.0.0/16 --dport 53 -j ACCEPT
+sleep 90
+systemctl start openvpn' >> /home/pi/configure.sh
 chmod +x /home/pi/configure.sh
 
 echo '#!/bin/sh -e
