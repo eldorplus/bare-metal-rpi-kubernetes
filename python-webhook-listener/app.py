@@ -20,8 +20,11 @@ def index():
         if data is None:
             data = json.loads(request.get_data())
 
-        print(data)
+        #print(data)
         token = request.args.get('token')
+        environmentToken = os.getenv('DOCKER_TOKEN')
+        #print(token)
+        #print(environmentToken)
 
         try:
             environment = data['push_data']['tag']
@@ -29,7 +32,7 @@ def index():
             print('error, could not deploy', e)
             return jsonify(success=False), 500
 
-        if str(token) == str(os.environ.get('DOCKERHUB_TOKEN')):
+        if str(token) == environmentToken:
             subprocess.call(f'./script.sh {environment}', shell=True)
             return jsonify(success=True)
 
