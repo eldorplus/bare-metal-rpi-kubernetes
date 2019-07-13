@@ -2,6 +2,7 @@ import os
 import subprocess
 import json
 from flask import Flask, jsonify, request
+from waitress import serve
 
 
 app = Flask(__name__)
@@ -20,11 +21,11 @@ def index():
         if data is None:
             data = json.loads(request.get_data())
 
-        #print(data)
+        # print(data)
         token = request.args.get('token')
         environmentToken = os.getenv('DOCKER_TOKEN')
-        #print(token)
-        #print(environmentToken)
+        # print(token)
+        # print(environmentToken)
 
         try:
             environment = data['push_data']['tag']
@@ -43,4 +44,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    # app.run(host='0.0.0.0', port=8000, debug=True)
+    serve(app, host='0.0.0.0', port=8000)
