@@ -1,16 +1,18 @@
 #!/bin/bash
-echo the image tag is $1
+echo $1
 
-if [[ $1 == 'dev-tag' ]]; then
+if [[ $1 == 'jp-website-frontend-dev' ]]; then
     echo dev environment
 fi
 
-if [[ $1 == 'prod-tag' ]]; then
+if [[ $1 == 'jp-website-frontend-prod' ]]; then
     echo prod environment
-    kubectl rollout restart deployment/prod-app-name
+    kubectl rollout restart deployment/jp-website-frontend
 fi
 
 
 if [[ $1 == 'ping' ]]; then
     echo pong
 fi
+
+

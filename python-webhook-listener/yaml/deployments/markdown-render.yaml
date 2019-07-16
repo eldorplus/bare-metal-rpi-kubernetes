@@ -1,0 +1,18 @@
+apiVersion: apps/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: markdown-render
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: markdown-render
+    spec:
+      containers:
+      - name: markdown-render
+        image: functions/markdownrender:latest-armhf
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
