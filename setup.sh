@@ -70,8 +70,11 @@ sudo kubeadm reset
 sudo rm -rf /var/lib/etcd # if not first time creating cluster
 fi
 
+if [[ $varname == "yes" ]]; then
 echo pulling images...
 sudo kubeadm config images pull -v3 &&
+fi
+
 echo assuming weave network controller...
 sudo kubeadm init && # --pod-network-cidr=10.244.0.0/16 # flannel only
 echo generating configs...
