@@ -110,7 +110,7 @@ systemctl start docker-autodeploy
 systemctl enable docker-autodeploy
 fi
 
-echo setting up packet forwarding between nodes
+echo setting up packet forwarding between nodes...
 echo '#wait a bit after reboot and then configure everything
 sleep 90
 iptables -P FORWARD ACCEPT' > /home/pi/configure.sh
@@ -122,6 +122,7 @@ sleep 90
 systemctl start openvpn' >> /home/pi/configure.sh
 chmod +x /home/pi/configure.sh
 
+echo setting up autostart on reboot...
 echo '#!/bin/sh -e
 #
 # rc.local
@@ -144,6 +145,7 @@ fi
 
 exit 0' > /etc/rc.local
 
+echo cleaning up...
 sudo bash /home/pi/configure.sh
 fi
 
@@ -174,13 +176,14 @@ $(echo $joincommand)
 #sudo kubeadm join $masterip:6443 --token $jointoken --discovery-token-ca-cert-hash certhash
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 
-echo setting up packet forwarding between nodes
+echo setting up packet forwarding between nodes...
 echo '#wait a bit after reboot and then configure everything
 sleep 90
 iptables -P FORWARD ACCEPT' > /home/pi/configure.sh
 
 chmod +x /home/pi/configure.sh
 
+echo setting up autostart on reboot...
 echo '#!/bin/sh -e
 #
 # rc.local
@@ -203,6 +206,7 @@ fi
 
 exit 0' > /etc/rc.local
 
+echo cleaning up...
 sudo bash /home/pi/configure.sh
 fi
 
