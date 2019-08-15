@@ -73,7 +73,7 @@ fi
 
 if [[ $varname == "yes" ]]; then
 echo pulling images...
-sudo kubeadm config images pull -v3 &&
+sudo kubeadm config images pull -v3
 fi
 
 echo assuming weave network controller...
