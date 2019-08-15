@@ -68,6 +68,7 @@ if [[ $varname == "no" ]]; then
 echo removing last cluster...
 sudo kubeadm reset
 sudo rm -rf /var/lib/etcd # if not first time creating cluster
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 fi
 
 if [[ $varname == "yes" ]]; then
@@ -149,7 +150,7 @@ fi
 exit 0' > /etc/rc.local
 
 echo cleaning up...
-sudo bash /home/pi/configure.sh
+sudo bash /home/pi/configure.sh &
 fi
 
 echo is this a worker node? yes/no
@@ -163,6 +164,7 @@ if [[ $varname == "no" ]]; then
 echo removing last cluster...
 sudo kubeadm reset
 sudo rm -rf /var/lib/etcd # if not first time creating cluster
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 fi
 
 
@@ -210,7 +212,7 @@ fi
 exit 0' > /etc/rc.local
 
 echo cleaning up...
-sudo bash /home/pi/configure.sh
+sudo bash /home/pi/configure.sh &
 fi
 
 ###############################################
