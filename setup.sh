@@ -119,7 +119,7 @@ echo '#wait a bit after reboot and then configure everything
 sleep 90
 iptables -P FORWARD ACCEPT' > /home/pi/configure.sh
 
-#only do this on master
+echo setting up master node vpn...
 echo 'iptables -I INPUT -p tcp -s 10.8.0.0/16 --dport 8000 -j ACCEPT
 iptables -I INPUT -p udp -s 10.8.0.0/16 --dport 53 -j ACCEPT
 sleep 90
