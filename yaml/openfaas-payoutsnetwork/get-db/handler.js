@@ -26,7 +26,7 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
     this.offset(offset).limit(per_page)
   ]).then(([total, rows]) => {
     let count = total.count;
-    let rows = rows;
+    rows = rows;
     pagination.total = count;
     pagination.per_page = per_page;
     pagination.last_page = Math.ceil(count / per_page);
@@ -36,6 +36,13 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
   });
 };
 
-module.exports = (context, callback) => {
-    callback(undefined, { knex: knex });
+module.exports = (event, context) => {
+    let err;
+    const result =             {
+        knex: knex
+    };
+
+    context
+        .status(200)
+        .succeed(result);
 }
