@@ -1,15 +1,15 @@
 "use strict";
-const fs require('fs')
-const mysqlHostFile = '/var/openfaas/secrets/mysql-host'
-const encoding = 'utf-8'
-
+const knex = require('../../configs/dbConfig.js')
 module.exports = (event, context) => {
   let err;
-  const host = fs.readFileSync(mysqlHostFile, encoding)
+  let r;
+  r = await knex
+      .select('employees.*', 'states.abbreviation as state_abbreviation')
+      .from('employees')
+      .leftJoin('states', 'employees.state_id', 'states.id')
+      .paginate(page, perPage);
   const result = {
-    mysqlHost: host,
-    status: "You said: " + host,
-    more: "this is another key value pair",
+    status: "success"
   };
 
   context.status(200).succeed(result);
