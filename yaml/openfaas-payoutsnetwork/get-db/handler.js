@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const vars = require("./knexfile.js");
 let knex = require("knex")({
@@ -37,12 +37,11 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
 };
 
 module.exports = (event, context) => {
-    let err;
-    const result =             {
-        knex: knex
-    };
+  let err;
+  const result = {
+    status: "success",
+    knex: knex
+  };
 
-    context
-        .status(200)
-        .succeed(result);
-}
+  context.status(200).succeed(result);
+};

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  get-db:
+    build: ./build/get-db/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7000:3000'
+    working_dir: /home/app
+    volumes:
+      - ./get-db:/home/app/function

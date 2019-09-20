@@ -24,7 +24,7 @@ functions:
     handler: ./states/get-states
     image: payoutsnetwork/get-states:latest
   get-db:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./get-db
     image: payoutsnetwork/get-db:latest
     secrets:
