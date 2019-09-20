@@ -7,46 +7,26 @@ functions:
     lang: node10-express-armhf
     handler: ./employees/get-employees
     image: payoutsnetwork/get-employees:latest
-    secrets:
-      - mysql-host
-      - mysql-password
-      - mysql-user
-      - mysql-database
-      - mysql-port
   post-employees:
     lang: node10-express-armhf
     handler: ./employees/post-employees
     image: payoutsnetwork/post-employees:latest
-    secrets:
-      - mysql-host
-      - mysql-password
-      - mysql-user
-      - mysql-database
-      - mysql-port
   put-employees:
     lang: node10-express-armhf
     handler: ./employees/put-employees
     image: payoutsnetwork/put-employees:latest
-    secrets:
-      - mysql-host
-      - mysql-password
-      - mysql-user
-      - mysql-database
-      - mysql-port
   delete-employees:
     lang: node10-express-armhf
     handler: ./employees/delete-employees
     image: payoutsnetwork/delete-employees:latest
-    secrets:
-      - mysql-host
-      - mysql-password
-      - mysql-user
-      - mysql-database
-      - mysql-port
   get-states:
     lang: node10-express-armhf
     handler: ./states/get-states
     image: payoutsnetwork/get-states:latest
+  get-db:
+    lang: node-armhf
+    handler: ./get-db
+    image: payoutsnetwork/get-db:latest
     secrets:
       - mysql-host
       - mysql-password

@@ -1,9 +1,9 @@
-const vars = require("../knexfile.js");
+"use strict"
+
+const vars = require("./knexfile.js");
 let knex = require("knex")({
   client: vars.client,
-  connection: {
-    ...vars.connection
-  },
+  connection: vars.connection,
   pool: { min: 0, max: 7 }
 });
 
@@ -12,7 +12,7 @@ let KnexQueryBuilder = require("knex/lib/query/builder");
 KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
   let pagination = {};
   //set defaults
-  let per_page = per_page || 10;
+  per_page = per_page || 10;
   let page = current_page || 1;
   //account for silly values
   if (page < 1) page = 1;
@@ -36,4 +36,6 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
   });
 };
 
-export default knex;
+module.exports = (context, callback) => {
+    callback(undefined, { knex: knex });
+}
