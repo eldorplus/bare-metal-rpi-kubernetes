@@ -13,7 +13,7 @@ const baseUrl = process.env.DOCKER_BASE_URL || "http://localhost";
 const buildDir = process.env.DOCKER_BUILD_DIRECTORY || "build";
 const dockerStartPort = process.env.DOCKER_START_PORT || 7000;
 const dockerComposeFile = process.env.DOCKER_COMPOSE || "docker-compose.yml";
-const deploymentFile = process.env.FAAS_DEPLOYMENT_FILE || "./deployment.yml";
+const deploymentFile = process.env.FAAS_DEPLOYMENT_FILE || "../deployment.yml";
 
 const arrayToObject = curry(function({ objKey }, agg, item) {
   const key = item[objKey];
@@ -32,11 +32,11 @@ function getFunctionNames() {
 
 function getDockerServices(functionName, index) {
   const port = dockerStartPort + index;
-  const handler = getDeployment().functions[functionName].handler;
+  const handler = "." + getDeployment().functions[functionName].handler;
   return {
     functionName,
     network_mode: "host",
-    build: `./${buildDir}/${functionName}/`,
+    build: `../${buildDir}/${functionName}/`,
     command: `sh -c "cd /home/app; npm start"`,
     environment: [
       `NODE_ENV=development`,
