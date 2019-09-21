@@ -1,2 +1,2 @@
-language: node10-express-armhf
-fprocess: node index.js
+language: nodemon-armhf
+fprocess: npm start

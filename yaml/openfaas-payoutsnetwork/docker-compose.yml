@@ -14,7 +14,7 @@ services:
       - '7000:7000'
     working_dir: /home/app
     volumes:
-      - './employees/get-employees:/home/app/function'
+      - './functions/employees/get-employees:/home/app/function'
   post-employees:
     network_mode: host
     build: ./build/post-employees/
@@ -29,7 +29,7 @@ services:
       - '7001:7001'
     working_dir: /home/app
     volumes:
-      - './employees/post-employees:/home/app/function'
+      - './functions/employees/post-employees:/home/app/function'
   put-employees:
     network_mode: host
     build: ./build/put-employees/
@@ -44,7 +44,7 @@ services:
       - '7002:7002'
     working_dir: /home/app
     volumes:
-      - './employees/put-employees:/home/app/function'
+      - './functions/employees/put-employees:/home/app/function'
   delete-employees:
     network_mode: host
     build: ./build/delete-employees/
@@ -59,7 +59,7 @@ services:
       - '7003:7003'
     working_dir: /home/app
     volumes:
-      - './employees/delete-employees:/home/app/function'
+      - './functions/employees/delete-employees:/home/app/function'
   get-states:
     network_mode: host
     build: ./build/get-states/
@@ -74,19 +74,4 @@ services:
       - '7004:7004'
     working_dir: /home/app
     volumes:
-      - './states/get-states:/home/app/function'
-  get-db:
-    network_mode: host
-    build: ./build/get-db/
-    command: sh -c "cd /home/app; npm start"
-    environment:
-      - NODE_ENV=development
-      - PORT=7005
-      - http_port=7005
-      - MYSQL_DB=payoutsnetwork
-      - MYSQL_PW=ranger
-    ports:
-      - '7005:7005'
-    working_dir: /home/app
-    volumes:
-      - './get-db:/home/app/function'
+      - './functions/states/get-states:/home/app/function'
