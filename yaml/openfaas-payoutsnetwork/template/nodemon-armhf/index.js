@@ -8,6 +8,7 @@ const app = express();
 const handler = require("./function/handler");
 const bodyParser = require("body-parser");
 const db = require("./db/dbconfig.js");
+const models = require("./model/models.js");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ class FunctionContext {
     this.cb = cb;
     this.headerValues = {};
     this.db = db;
+    this.models = models;
   }
 
   status(value) {

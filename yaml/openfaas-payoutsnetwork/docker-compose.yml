@@ -2,7 +2,8 @@ version: '3'
 services:
   get-employees:
     network_mode: host
-    build: ../build/get-employees/
+    container_name: get-employees
+    build: ./build/get-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -14,10 +15,13 @@ services:
       - '7000:7000'
     working_dir: /home/app
     volumes:
-      - '../functions/employees/get-employees:/home/app/function'
+      - './functions/employees/get-employees:/home/app/function'
+      - './template/nodemon-armhf/db:/home/app/db'
+      - './template/nodemon-armhf/model:/home/app/model'
   post-employees:
     network_mode: host
-    build: ../build/post-employees/
+    container_name: post-employees
+    build: ./build/post-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -29,10 +33,13 @@ services:
       - '7001:7001'
     working_dir: /home/app
     volumes:
-      - '../functions/employees/post-employees:/home/app/function'
-  put-employees:
+      - './functions/employees/post-employees:/home/app/function'
+      - './template/nodemon-armhf/db:/home/app/db'
+      - './template/nodemon-armhf/model:/home/app/model'
+  patch-employees:
     network_mode: host
-    build: ../build/put-employees/
+    container_name: patch-employees
+    build: ./build/patch-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -44,10 +51,13 @@ services:
       - '7002:7002'
     working_dir: /home/app
     volumes:
-      - '../functions/employees/put-employees:/home/app/function'
+      - './functions/employees/patch-employees:/home/app/function'
+      - './template/nodemon-armhf/db:/home/app/db'
+      - './template/nodemon-armhf/model:/home/app/model'
   delete-employees:
     network_mode: host
-    build: ../build/delete-employees/
+    container_name: delete-employees
+    build: ./build/delete-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -59,10 +69,13 @@ services:
       - '7003:7003'
     working_dir: /home/app
     volumes:
-      - '../functions/employees/delete-employees:/home/app/function'
+      - './functions/employees/delete-employees:/home/app/function'
+      - './template/nodemon-armhf/db:/home/app/db'
+      - './template/nodemon-armhf/model:/home/app/model'
   get-states:
     network_mode: host
-    build: ../build/get-states/
+    container_name: get-states
+    build: ./build/get-states/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -74,4 +87,6 @@ services:
       - '7004:7004'
     working_dir: /home/app
     volumes:
-      - '../functions/states/get-states:/home/app/function'
+      - './functions/states/get-states:/home/app/function'
+      - './template/nodemon-armhf/db:/home/app/db'
+      - './template/nodemon-armhf/model:/home/app/model'

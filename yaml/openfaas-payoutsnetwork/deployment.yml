@@ -23,10 +23,10 @@ functions:
       - mysql-user
       - mysql-database
       - mysql-port
-  put-employees:
+  patch-employees:
     lang: nodemon-armhf
-    handler: ./functions/employees/put-employees
-    image: payoutsnetwork/put-employees:latest
+    handler: ./functions/employees/patch-employees
+    image: payoutsnetwork/patch-employees:latest
     secrets:
       - mysql-host
       - mysql-password
