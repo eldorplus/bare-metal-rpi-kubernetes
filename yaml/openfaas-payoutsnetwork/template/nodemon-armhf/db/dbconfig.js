@@ -36,22 +36,6 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
   });
 };
 
-module.exports = async (event, context) => {
-  let err;
-  let r;
-  const { page, perPage, sort, sortDirection } = {
-    ...event.body
-  };
-  r = await knex
-    .select("employees.*", "states.abbreviation as state_abbreviation")
-    .from("employees")
-    .leftJoin("states", "employees.state_id", "states.id")
-    .paginate(page, perPage);
-  const result = {
-    status: "success",
-    knex: r,
-    event: event.method
-  };
-
-  context.status(200).succeed(result);
+module.exports = {
+  knex: knex
 };

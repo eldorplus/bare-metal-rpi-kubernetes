@@ -16,11 +16,11 @@ try {
   const port = fs.readFileSync(mysqlPortFile, encoding);
   const user = fs.readFileSync(mysqlUserFile, encoding);
 } catch (e) {
-  host = "localhost";
-  database = "payoutsnetwork";
-  password = "ranger";
-  port = "3306";
-  user = "root";
+  host = process.env.MYSQL_HOST || "localhost";
+  database = process.env.MYSQL_DB || "database";
+  password = process.env.MYSQL_PW || "password";
+  port = process.env.MYSQL_PORT || "3306";
+  user = process.env.MYSQL_USER || "root";
 }
 
 module.exports = {

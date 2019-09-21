@@ -1,62 +1,92 @@
 version: '3'
 services:
   get-employees:
+    network_mode: host
     build: ./build/get-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7000
+      - http_port=7000
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7000:3000'
+      - '7000:7000'
     working_dir: /home/app
     volumes:
       - './employees/get-employees:/home/app/function'
   post-employees:
+    network_mode: host
     build: ./build/post-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7001
+      - http_port=7001
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7001:3000'
+      - '7001:7001'
     working_dir: /home/app
     volumes:
       - './employees/post-employees:/home/app/function'
   put-employees:
+    network_mode: host
     build: ./build/put-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7002
+      - http_port=7002
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7002:3000'
+      - '7002:7002'
     working_dir: /home/app
     volumes:
       - './employees/put-employees:/home/app/function'
   delete-employees:
+    network_mode: host
     build: ./build/delete-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7003
+      - http_port=7003
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7003:3000'
+      - '7003:7003'
     working_dir: /home/app
     volumes:
       - './employees/delete-employees:/home/app/function'
   get-states:
+    network_mode: host
     build: ./build/get-states/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7004
+      - http_port=7004
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7004:3000'
+      - '7004:7004'
     working_dir: /home/app
     volumes:
       - './states/get-states:/home/app/function'
   get-db:
+    network_mode: host
     build: ./build/get-db/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
+      - PORT=7005
+      - http_port=7005
+      - MYSQL_DB=payoutsnetwork
+      - MYSQL_PW=ranger
     ports:
-      - '7005:3000'
+      - '7005:7005'
     working_dir: /home/app
     volumes:
       - './get-db:/home/app/function'

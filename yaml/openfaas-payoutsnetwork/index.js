@@ -4,16 +4,10 @@ const express = require("express");
 const proxy = require("express-http-proxy");
 const { curry } = require("lodash");
 const app = express();
-//const bodyParser = require("body-parser");
 const yaml = require("js-yaml");
 const fs = require("fs");
 const compose = require("docker-compose");
 const path = require("path");
-
-//app.use(bodyParser.json());
-//app.use(bodyParser.raw());
-//app.use(bodyParser.text({ type: "text/*" }));
-//app.disable("x-powered-by");
 
 const baseUrl = process.env.DOCKER_BASE_URL || "http://localhost";
 const buildDir = process.env.DOCKER_BUILD_DIRECTORY || "build";
@@ -23,8 +17,7 @@ const deploymentFile = process.env.FAAS_DEPLOYMENT_FILE || "./deployment.yml";
 
 const arrayToObject = curry(function({ objKey }, agg, item) {
   const key = item[objKey];
-  //array destructuring to remove key immutably
-  const { [objKey]: omit, ...newItem } = item;
+  const { [objKey]: omit, ...newItem } = item; //array destructuring to remove key immutably
   agg[key] = newItem;
   return agg;
 });
@@ -42,10 +35,17 @@ function getDockerServices(functionName, index) {
   const handler = getDeployment().functions[functionName].handler;
   return {
     functionName,
+    network_mode: "host",
     build: `./${buildDir}/${functionName}/`,
     command: `sh -c "cd /home/app; npm start"`,
-    environment: [`NODE_ENV=development`],
-    ports: [`${port}:3000`],
+    environment: [
+      `NODE_ENV=development`,
+      `PORT=${port}`,
+      `http_port=${port}`,
+      `MYSQL_DB=${process.env.MYSQL_DB}`,
+      `MYSQL_PW=${process.env.MYSQL_PW}`
+    ],
+    ports: [`${port}:${port}`],
     working_dir: `/home/app`,
     volumes: [`${handler}:/home/app/function`]
   };
