@@ -1,8 +1,7 @@
 version: '3'
-
 services:
-  get-db:
-    build: ./build/get-db/
+  get-employees:
+    build: ./build/get-employees/
     command: sh -c "cd /home/app; npm start"
     environment:
       - NODE_ENV=development
@@ -10,4 +9,54 @@ services:
       - '7000:3000'
     working_dir: /home/app
     volumes:
-      - ./get-db:/home/app/function
+      - './employees/get-employees:/home/app/function'
+  post-employees:
+    build: ./build/post-employees/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7001:3000'
+    working_dir: /home/app
+    volumes:
+      - './employees/post-employees:/home/app/function'
+  put-employees:
+    build: ./build/put-employees/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7002:3000'
+    working_dir: /home/app
+    volumes:
+      - './employees/put-employees:/home/app/function'
+  delete-employees:
+    build: ./build/delete-employees/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7003:3000'
+    working_dir: /home/app
+    volumes:
+      - './employees/delete-employees:/home/app/function'
+  get-states:
+    build: ./build/get-states/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7004:3000'
+    working_dir: /home/app
+    volumes:
+      - './states/get-states:/home/app/function'
+  get-db:
+    build: ./build/get-db/
+    command: sh -c "cd /home/app; npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '7005:3000'
+    working_dir: /home/app
+    volumes:
+      - './get-db:/home/app/function'

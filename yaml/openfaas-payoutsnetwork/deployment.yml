@@ -4,23 +4,23 @@ provider:
   gateway: http://192.168.1.208:31112
 functions:
   get-employees:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./employees/get-employees
     image: payoutsnetwork/get-employees:latest
   post-employees:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./employees/post-employees
     image: payoutsnetwork/post-employees:latest
   put-employees:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./employees/put-employees
     image: payoutsnetwork/put-employees:latest
   delete-employees:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./employees/delete-employees
     image: payoutsnetwork/delete-employees:latest
   get-states:
-    lang: node10-express-armhf
+    lang: nodemon-armhf
     handler: ./states/get-states
     image: payoutsnetwork/get-states:latest
   get-db:
