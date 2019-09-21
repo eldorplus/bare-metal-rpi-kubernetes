@@ -1,5 +1,5 @@
 "use strict";
-const db = require("./db/dbconfig.js");
+
 module.exports = async (event, context) => {
   let err;
   const knex = context.db.knex();
