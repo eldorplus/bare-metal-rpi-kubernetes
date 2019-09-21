@@ -16,7 +16,16 @@ function getVars() {
     const password = fs.readFileSync(mysqlPasswordFile, encoding);
     const port = fs.readFileSync(mysqlPortFile, encoding);
     const user = fs.readFileSync(mysqlUserFile, encoding);
+    console.log(
+      "mysql success details: ",
+      host,
+      port,
+      database,
+      password,
+      user
+    );
   } catch (e) {
+    console.log("error reading files: ", e);
     host = process.env.MYSQL_HOST || "localhost";
     database = process.env.MYSQL_DB || "database";
     password = process.env.MYSQL_PW || "password";

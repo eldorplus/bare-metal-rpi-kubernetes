@@ -1,4 +1,5 @@
 "use strict";
+let knex = require("knex");
 const knexfile = require("./knexfile.js");
 
 //monkey patch pagination into knex
@@ -32,12 +33,11 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
 
 function openConnection() {
   const vars = knexfile.getVars();
-  let knex = require("knex")({
+  return knex({
     client: vars.client,
     connection: vars.connection,
     pool: { min: 0, max: 7 }
   });
-  return knex;
 }
 
 module.exports = {
