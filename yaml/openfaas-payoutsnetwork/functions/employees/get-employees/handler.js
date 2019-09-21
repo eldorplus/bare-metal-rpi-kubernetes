@@ -2,7 +2,7 @@
 const db = require("./db/dbconfig.js");
 module.exports = async (event, context) => {
   let err;
-  const knex = context.db("knex")();
+  const knex = context.db.knex();
   let r;
   const { page, perPage, sort, sortDirection } = {
     ...event.body

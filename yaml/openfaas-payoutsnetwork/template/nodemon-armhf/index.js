@@ -30,10 +30,7 @@ class FunctionContext {
     this.value = 200;
     this.cb = cb;
     this.headerValues = {};
-  }
-
-  db(connector) {
-    return db[connector];
+    this.db = db;
   }
 
   status(value) {

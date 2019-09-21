@@ -35,10 +35,6 @@ RUN npm i || :
 COPY function/ ./
 
 # COPY db files and folders
-WORKDIR /home/app/function/db
-COPY function/db/ ./
-
-# COPY db files and folders
 WORKDIR /home/app/db
 COPY db/ ./
 
