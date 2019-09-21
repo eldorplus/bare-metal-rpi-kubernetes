@@ -7,8 +7,6 @@ const express = require("express");
 const app = express();
 const handler = require("./function/handler");
 const bodyParser = require("body-parser");
-const db = require("./db/dbconfig.js");
-const knex = db.knex;
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,7 +16,6 @@ app.disable("x-powered-by");
 
 class FunctionEvent {
   constructor(req) {
-    this.knex = knex;
     this.body = req.body;
     this.headers = req.headers;
     this.method = req.method;

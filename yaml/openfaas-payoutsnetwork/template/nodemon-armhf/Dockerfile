@@ -35,8 +35,8 @@ RUN npm i || :
 COPY function/ ./
 
 # COPY db files and folders
-WORKDIR /home/app/db
-COPY db/ ./
+WORKDIR /home/app/function/db
+COPY function/db/ ./
 
 # Set correct permissions to use non root user
 WORKDIR /home/app/

@@ -1,12 +1,19 @@
-"use strict"
+"use strict";
+const db = require("./db/dbconfig.js");
 
-module.exports = (event, context) => {
-    let err;
-    const result =             {
-        status: "You said: " + JSON.stringify(event.body)
-    };
+module.exports = async (event, context) => {
+  let err;
+  const body = event.body;
 
-    context
-        .status(200)
-        .succeed(result);
-}
+  const knex = db.knex();
+  r = await knex
+    .select()
+    .from("table")
+    .paginate(page, perPage);
+
+  const result = {
+    body: r
+  };
+
+  context.status(200).succeed(result);
+};
