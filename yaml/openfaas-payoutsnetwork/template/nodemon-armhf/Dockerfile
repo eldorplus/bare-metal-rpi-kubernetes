@@ -38,6 +38,10 @@ COPY function/ ./
 WORKDIR /home/app/function/db
 COPY function/db/ ./
 
+# COPY db files and folders
+WORKDIR /home/app/db
+COPY db/ ./
+
 # Set correct permissions to use non root user
 WORKDIR /home/app/
 
