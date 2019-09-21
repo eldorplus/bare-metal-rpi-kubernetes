@@ -30,7 +30,11 @@ class FunctionContext {
   constructor(cb) {
     this.value = 200;
     this.cb = cb;
-    this.headerValues = {};
+    this.headerValues = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
+      "Access-Control-Allow-Headers": "Content-Type"
+    };
     this.db = db;
     this.models = models;
   }
@@ -49,7 +53,7 @@ class FunctionContext {
       return this.headerValues;
     }
 
-    this.headerValues = value;
+    this.headerValues = { ...this.headerValues, ...value };
     return this;
   }
 

@@ -12,13 +12,7 @@ module.exports = async function Validate(model, body) {
     return {
       status: "fail",
       response: {
-        statusCode: 400,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
-          "Access-Control-Allow-Headers": "Content-Type"
-        },
-        isBase64Encoded: false,
+        status: 400,
         body: "error: " + e
       }
     };
@@ -34,14 +28,8 @@ module.exports = async function Validate(model, body) {
       return {
         status: "fail",
         response: {
-          statusCode: 400,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
-            "Access-Control-Allow-Headers": "Content-Type"
-          },
-          isBase64Encoded: false,
-          body: "error: " + key + "MustBeUnique"
+          status: 400,
+          body: "error: " + key + "Must Be Unique"
         }
       };
     }

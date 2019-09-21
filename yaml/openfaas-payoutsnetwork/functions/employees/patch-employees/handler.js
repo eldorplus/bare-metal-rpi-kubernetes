@@ -1,7 +1,6 @@
 "use strict";
 
 module.exports = async (event, context) => {
-  let err;
   const body = event.body;
   const { Employee } = context.models;
   try {
@@ -9,31 +8,13 @@ module.exports = async (event, context) => {
       .patch({ status: "active" })
       .where("id", body.id);
 
-    const result = {
-      statusCode: 200,
-      body: "User activated",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
-        "Access-Control-Allow-Headers": "content-type"
-      },
-      isBase64Encoded: false
-    };
-    context.status(200).succeed(result);
+    const status = 200;
+    const body = "User activated";
+    context.status(status).succeed(body);
   } catch (e) {
-    //console.log(e);
-    const result = {
-      statusCode: 400,
-      body: "error: " + e,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
-        "Access-Control-Allow-Headers": "Content-Type"
-      },
-      isBase64Encoded: false
-    };
-    context.status(400).fail(result);
+    console.log(e);
+    const status = 400;
+    const body = "error: " + e;
+    context.status(status).fail(body);
   }
-
-  context.status(200).succeed(result);
 };

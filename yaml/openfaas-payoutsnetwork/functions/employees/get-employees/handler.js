@@ -1,13 +1,12 @@
 "use strict";
 
 module.exports = async (event, context) => {
-  let err;
   const knex = context.db.knex();
-  let r;
   const { page, perPage, sort, sortDirection } = {
     ...event.body
   };
 
+  let r;
   if (sort && sortDirection) {
     r = await knex
       .select("employees.*", "states.abbreviation as state_abbreviation")
@@ -23,16 +22,7 @@ module.exports = async (event, context) => {
       .paginate(page, perPage);
   }
 
-  const result = {
-    statusCode: 200,
-    body: JSON.stringify(r),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
-      "Access-Control-Allow-Headers": "Content-Type"
-    },
-    isBase64Encoded: false
-  };
-
-  context.status(200).succeed(result);
+  const body = r;
+  const status = 200;
+  context.status(status).succeed(body);
 };
