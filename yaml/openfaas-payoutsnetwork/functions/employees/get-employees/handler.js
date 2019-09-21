@@ -3,7 +3,6 @@ const db = require("./db/dbconfig.js");
 module.exports = async (event, context) => {
   let err;
   const knex = db.knex();
-  console.log("knex", knex);
   let r;
   const { page, perPage, sort, sortDirection } = {
     ...event.body

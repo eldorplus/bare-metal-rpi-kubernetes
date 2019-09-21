@@ -33,7 +33,6 @@ KnexQueryBuilder.prototype.paginate = function(current_page, per_page) {
 
 function openConnection() {
   const vars = knexfile.getVars();
-  console.log("openconnection vars:", vars);
   return knex({
     client: vars.client,
     connection: vars.connection,
