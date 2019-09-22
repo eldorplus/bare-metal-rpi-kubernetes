@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+    - /dashboard
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik
+
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`traefik.tk`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: traefik-admin
+      port: 8080

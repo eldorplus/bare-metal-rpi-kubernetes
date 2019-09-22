@@ -29,12 +29,13 @@ def index():
 
         try:
             environment = data['push_data']['tag']
+            repo = data['repository']['repo_name']
         except Exception as e:
             print('error, could not deploy', e)
             return jsonify(success=False), 500
 
         if str(token) == environmentToken:
-            subprocess.call(f'./script.sh {environment}', shell=True)
+            subprocess.call(f'./script.sh {environment} {repo}', shell=True)
             return jsonify(success=True)
 
         return jsonify(success=False), 500

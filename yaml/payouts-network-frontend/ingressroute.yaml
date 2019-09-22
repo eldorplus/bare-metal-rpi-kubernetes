@@ -1,0 +1,31 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: pn-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+    - /payoutsnetwork
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: payouts-network-frontend
+
+spec:
+  entryPoints:
+    - web
+  routes:
+  #- match: PathPrefix(`/payoutsnetwork`)
+  - match: Host(`payoutsnetwork.tk`) && PathPrefix(`/`)
+    kind: Rule
+    priority: 12
+    services:
+    - name: payouts-network-frontend
+      port: 80
+      weight: 1
+      passHostHeader: true
+      responseForwarding:
+        flushInterval: 100ms
+    middlewares:
+    - name: pn-stripprefix
