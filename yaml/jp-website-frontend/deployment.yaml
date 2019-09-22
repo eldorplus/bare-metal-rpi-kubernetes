@@ -14,5 +14,6 @@ spec:
         image: jpribyl/website-frontend:jp-website-frontend-prod
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
-          protocol: TCP
+          - name: web
+            containerPort: 3000
+            protocol: TCP
