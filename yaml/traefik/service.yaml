@@ -13,6 +13,10 @@ spec:
       name: admin
       port: 8080
       nodePort: 30103
+    - protocol: TCP
+      name: websecure
+      port: 4443
+      nodePort: 30105
   selector:
     app: traefik
 ---
@@ -26,5 +30,18 @@ spec:
     - protocol: TCP
       name: admin
       port: 8080
+  selector:
+    app: traefik
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-websecure
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: websecure
+      port: 4443
   selector:
     app: traefik

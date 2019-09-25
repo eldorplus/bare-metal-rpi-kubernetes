@@ -117,7 +117,6 @@ spec:
           - --insecure-bind-address=0.0.0.0
           - --insecure-port=9090
           - --enable-insecure-login
-          - --accept-hosts='^*$'
           - --enable-skip-login
           - --disable-settings-authorizer
           # Uncomment the following line to manually specify Kubernetes API server Host

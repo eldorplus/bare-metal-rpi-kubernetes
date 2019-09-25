@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: smartlights-frontend
-        image: smartlights-frontend/web-frontend:latest
+        image: smartlights/web-frontend:latest
         imagePullPolicy: Always
         ports:
           - name: web
