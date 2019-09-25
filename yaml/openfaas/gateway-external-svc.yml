@@ -18,3 +18,17 @@ spec:
       nodePort: 31112
   selector:
     app: gateway
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-admin
+  namespace: openfaas
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+  selector:
+    app: gateway

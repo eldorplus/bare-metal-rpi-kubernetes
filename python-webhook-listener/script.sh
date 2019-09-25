@@ -14,6 +14,9 @@ if [[ $2 == 'payoutsnetwork/web-frontend' ]]; then
     kubectl rollout restart deployment/payouts-network-frontend
 fi
 
+if [[ $2 == 'smartlights/web-frontend' ]]; then
+    kubectl rollout restart deployment/smartlights-frontend
+fi
 
 if [[ $1 == 'ping' ]]; then
     echo pong

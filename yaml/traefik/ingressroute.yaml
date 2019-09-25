@@ -16,7 +16,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`traefik.tk`) && PathPrefix(`/`)
+  - match: Host(`traefik.tk`)
     kind: Rule
     services:
     - name: traefik-admin

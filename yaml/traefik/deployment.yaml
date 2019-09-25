@@ -31,8 +31,17 @@ spec:
             - --ping
             - --accesslog=true
             - --log=true
+            - --entrypoints.websecure.Address=:4443
+            - --certificatesresolvers.default.acme.tlschallenge
+            - --certificatesresolvers.default.acme.email=pribylsnbits@gmail.com
+            - --certificatesresolvers.default.acme.storage=acme.json
+            # Please note that this is the staging Let's Encrypt server.
+            # Once you get things working, you should remove that whole line altogether.
+            - --certificatesresolvers.default.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
           ports:
             - name: web
               containerPort: 8000
+            - name: websecure
+              containerPort: 4443
             - name: admin
               containerPort: 8080
