@@ -1,4 +1,12 @@
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: smartlights-frontend-redirect-scheme
+spec:
+  redirectScheme:
+    scheme: https
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: smartlights-frontend
@@ -17,3 +25,21 @@ spec:
       passHostHeader: true
       responseForwarding:
         flushInterval: 100ms
+    middlewares:
+    - name: smartlights-frontend-redirect-scheme
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: smartlights-frontend-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`smartlights.tk`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: smartlights-frontend
+      port: 80
+  tls:
+    certResolver: default

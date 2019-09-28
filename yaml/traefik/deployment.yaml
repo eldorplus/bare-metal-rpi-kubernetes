@@ -30,8 +30,6 @@ spec:
             - --providers.kubernetescrd
             - --ping
             - --accesslog=true
-            - --log=true
-            - --log.level=debug
             - --entrypoints.websecure.Address=:4443
             - --certificatesresolvers.default.acme.tlschallenge
             - --certificatesresolvers.default.acme.email=pribylsnbits@gmail.com

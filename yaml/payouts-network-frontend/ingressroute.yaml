@@ -1,17 +1,15 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: pn-stripprefix
+  name: payouts-network-redirect-scheme
 spec:
-  stripPrefix:
-    prefixes:
-    - /payoutsnetwork
+  redirectScheme:
+    scheme: https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: payouts-network-frontend
-
 spec:
   entryPoints:
     - web
@@ -28,4 +26,20 @@ spec:
       responseForwarding:
         flushInterval: 100ms
     middlewares:
-    - name: pn-stripprefix
+    - name: payouts-network-redirect-scheme
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: payouts-network-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`payoutsnetwork.tk`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: payouts-network-frontend
+      port: 80
+  tls:
+    certResolver: default

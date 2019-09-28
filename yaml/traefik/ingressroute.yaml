@@ -1,11 +1,10 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: dashboard-stripprefix
+  name: traefik-redirect-scheme
 spec:
-  stripPrefix:
-    prefixes:
-    - /dashboard
+  redirectScheme:
+    scheme: https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -21,3 +20,21 @@ spec:
     services:
     - name: traefik-admin
       port: 8080
+    middlewares:
+    - name: traefik-redirect-scheme
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`traefik.tk`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: traefik-admin
+      port: 8080
+  tls:
+    certResolver: default
